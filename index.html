@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ممبرروبیک | خدمات عضویت روبیکا</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#fff8e1;
+    color:#222;
+}
+
+header{
+    background:#f4c430;
+    padding:22px 15px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.subtitle{
+    margin-top:8px;
+    font-size:15px;
+}
+
+.container{
+    max-width:650px;
+    margin:30px auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+h2{
+    margin-top:0;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.counter{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    margin:20px 0;
+}
+
+.counter button{
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:50%;
+    background:#f4c430;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.count{
+    width:150px;
+    text-align:center;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.price{
+    background:#fff3bd;
+    border-radius:12px;
+    padding:18px;
+    text-align:center;
+    margin:20px 0;
+}
+
+.price-title{
+    font-size:14px;
+}
+
+.price-number{
+    font-size:28px;
+    font-weight:bold;
+    color:#b8860b;
+    margin-top:8px;
+}
+
+.buy{
+    width:100%;
+    padding:16px;
+    border:0;
+    border-radius:12px;
+    background:#222;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.buy:hover{
+    background:#444;
+}
+
+.info{
+    line-height:2;
+    font-size:14px;
+    color:#555;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🟡 ممبرروبیک</div>
+    <div class="subtitle">
+        خدمات عضویت روبیکا
+    </div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🛒 ثبت سفارش</h2>
+
+<label for="rubikaId">
+شناسه روبیکا
+</label>
+
+<input
+    id="rubikaId"
+    type="text"
+    placeholder="@شناسه روبیکا را وارد کنید"
+>
+
+<label>
+تعداد ممبر
+</label>
+
+<div class="counter">
+
+<button onclick="changeCount(-100)">−</button>
+
+<div class="count" id="count">
+100
+</div>
+
+<button onclick="changeCount(100)">+</button>
+
+</div>
+
+<div class="price">
+
+<div class="price-title">
+قیمت هر ۱۰۰ ممبر
+</div>
+
+<div>
+۲۰۰٬۰۰۰ تومان
+</div>
+
+<div class="price-number" id="price">
+۲۰۰٬۰۰۰ تومان
+</div>
+
+</div>
+
+<button class="buy" onclick="continuePayment()">
+ادامه و پرداخت
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>📌 اطلاعات سفارش</h2>
+
+<div class="info">
+
+• حداقل سفارش: ۱۰۰ ممبر<br>
+
+• حداکثر سفارش: ۱۰٬۰۰۰ ممبر<br>
+
+• تعداد سفارش با دکمه‌های + و − قابل تغییر است.<br>
+
+• قیمت سفارش به‌صورت خودکار محاسبه می‌شود.<br>
+
+• پس از پرداخت، اطلاعات سفارش ثبت خواهد شد.
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+ممبرروبیک © 2026
+</footer>
+
+
+<script>
+
+let count = 100;
+
+const pricePer100 = 200000;
+
+function formatNumber(number){
+
+    return number.toLocaleString('fa-IR');
+
+}
+
+function changeCount(amount){
+
+    count += amount;
+
+    if(count < 100){
+        count = 100;
+    }
+
+    if(count > 10000){
+        count = 10000;
+    }
+
+    document.getElementById("count").innerText =
+        formatNumber(count);
+
+    const total =
+        (count / 100) * pricePer100;
+
+    document.getElementById("price").innerText =
+        formatNumber(total) + " تومان";
+}
+
+
+function continuePayment(){
+
+    const rubikaId =
+        document.getElementById("rubikaId").value.trim();
+
+    if(rubikaId === ""){
+
+        alert("لطفاً شناسه روبیکا را وارد کنید.");
+
+        return;
+
+    }
+
+    const total =
+        (count / 100) * pricePer100;
+
+    alert(
+        "سفارش شما آماده پرداخت است.\n\n" +
+        "شناسه: " + rubikaId + "\n" +
+        "تعداد: " + formatNumber(count) + " ممبر\n" +
+        "مبلغ: " + formatNumber(total) + " تومان"
+    );
+
+}
+
+</script>
+
+</body>
+  </html>
